@@ -18,8 +18,8 @@ export default function App() {
   const [voiceOptions, setVoiceOptions] = useState();
   const [rate, setRate] = useState(1);
   const [pitch, setPitch] = useState(1);
-  const [language, setLanguage] = useState("en-US");
-  const [languageOptions, setLanguageOptions] = useState([]);
+  const [language, setLanguage] = useState();
+  const [languageOptions, setLanguageOptions] = useState();
 
   useEffect(() => {
     if (typeof "speechSynthesis" !== undefined) {
@@ -32,6 +32,16 @@ export default function App() {
       setLanguageOptions(Array.from(uniqueLangs.values()));
     }
   }, []);
+
+  useEffect(() => {
+    // Set default.
+    if (voiceOptions) setVoice(voiceOptions[0]);
+  }, [voiceOptions]);
+
+  useEffect(() => {
+    // Set default.
+    if (languageOptions) setLanguage(languageOptions[0]);
+  }, [languageOptions]);
 
   const handlePhraseChange = (event) => {
     setPhrase(event.target.value);
@@ -89,11 +99,13 @@ export default function App() {
   return (
     <div className="App no-scroll">
       <div className="main w-100 h-100">
-        <div className="form-container h-100 space-even no-scroll column">
-          <h2>Synthetic Speech</h2>
+        <div className="form-container w-80 h-100 space-even no-scroll column">
+          <div className="form-input column">
+            <h3>Speech Synthesis</h3>
+          </div>
 
           <div className="form-input column">
-            <label htmlFor="lang">Choose langage: {language}</label>
+            <label htmlFor="lang">Select a langage: {language}</label>
             <select
               id="lang"
               name="lang"
@@ -110,7 +122,7 @@ export default function App() {
           </div>
 
           <div className="form-input column">
-            <label htmlFor="voice">Choose a voice:</label>
+            <label htmlFor="voice">Select a voice: {voice?.name}</label>
             <select
               id="voice"
               name="voice"
@@ -127,7 +139,7 @@ export default function App() {
           </div>
 
           <div className="form-input column">
-            <label htmlFor="pitch">Pitch: {pitch}</label>
+            <label htmlFor="pitch">Adjust voice pitch: {pitch}</label>
             <input
               type="range"
               id="pitch"
@@ -141,7 +153,7 @@ export default function App() {
           </div>
 
           <div className="form-input column">
-            <label htmlFor="speech-rate">Speech rate: {rate}</label>
+            <label htmlFor="speech-rate">Adjust speech rate: {rate}</label>
             <input
               type="range"
               id="speech-rate"
@@ -155,14 +167,15 @@ export default function App() {
           </div>
 
           <div className="form-input column">
-            <label htmlFor="phrase">Enter phrase:</label>
+            <label htmlFor="phrase">Enter a phrase:</label>
             <textarea
               name="phrase"
               id="phrase"
               cols="60"
-              rows="10"
+              rows="5"
               value={phrase}
               onChange={handlePhraseChange}
+              placeholder="Write something..."
             ></textarea>
           </div>
 
