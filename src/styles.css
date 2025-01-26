@@ -1,0 +1,82 @@
+.App {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  width: 100dvw;
+  height: 100dvh;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.mh-100 {
+  min-height: 100%;
+}
+
+input[type="text"],
+input[type="button"],
+select {
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+}
+
+input[type="text"],
+select,
+textarea {
+  border: 1px solid;
+}
+
+input[type="button"] {
+  margin: 5px;
+  background-color: #436969;
+  color: white;
+  border: none;
+  text-transform: uppercase;
+}
+
+input[type="button"]:hover {
+  background-color: darkslategrey;
+}
+
+input[type="button"]:disable {
+  background-color: lightslategrey;
+}
+
+textarea {
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+label {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.space-even {
+  justify-content: space-evenly;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
